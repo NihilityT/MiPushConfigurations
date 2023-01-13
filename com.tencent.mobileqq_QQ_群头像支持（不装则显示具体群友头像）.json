@@ -1,0 +1,20 @@
+﻿{
+  "version": "0.1.0",
+  "configs": {
+    "qq群头像支持": [
+      {
+        "metaInfo": {
+          "extra": {
+            "intent_uri": "S\\.groupcode=(?<id>\\d+)"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "notification_large_icon_uri": "http://p.qlogo.cn/gh/${id}/${id}/100"
+          }
+        },
+        "stop": false
+      }
+    ]
+  }
+}

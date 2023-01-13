@@ -1,0 +1,36 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "com.coolapk.market": [
+      {
+        "name": "头像支持",
+        "metaInfo": {
+          "extra": {
+            "intent_uri": "customContent=(?<encodedURI>[^&]+)",
+            "notification_large_icon_uri": null
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "notification_large_icon_uri": [
+              "property",
+              "fromUserAvatar",
+              [
+                "parse-json",
+                [
+                  "decode-uri",
+                  [
+                    "$",
+                    "encodedURI"
+                  ]
+                ]
+              ]
+            ]
+          }
+        },
+        "stop": false
+      },
+      "大图标显示成圆形"
+    ]
+  }
+}

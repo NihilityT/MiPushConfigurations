@@ -1,0 +1,25 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "群消息整形-原生通知样式": [
+      {
+        "metaInfo": {
+          "title": "(?<title>.*)",
+          "description": "(?<name>.*?)[:：] \\s*(?<content>[\\s\\S]*)",
+          "extra": {
+            "intent_uri": "S.jumptype=57619",
+            "__mipush_tag_adjust": null
+          }
+        },
+        "newMetaInfo": {
+          "title": "${name}",
+          "description": "${content}",
+          "extra": {
+            "__mi_push_sub_text": "${title}"
+          }
+        },
+        "stop": false
+      }
+    ]
+  }
+}

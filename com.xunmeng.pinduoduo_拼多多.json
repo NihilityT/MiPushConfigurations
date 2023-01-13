@@ -1,0 +1,37 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "com.xunmeng.pinduoduo": [
+      "允许运营消息",
+      {
+        "name": "拼多多_通知标题含有关键词则过滤",
+        "metaInfo": {
+          "title": "优惠券过期提醒|省钱账单"
+        },
+        "operation": "ignore",
+        "stop": false
+      },
+      {
+        "name": "通知带图",
+        "metaInfo": {
+          "extra": {
+            "intent_uri": "thumb_url=(?<encodedURI>[^&]+)",
+            "notification_large_icon_uri": null
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "notification_large_icon_uri": [
+              "decode-uri",
+              [
+                "$",
+                "encodedURI"
+              ]
+            ]
+          }
+        },
+        "stop": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,213 @@
+﻿{
+  "version": "0.1.0",
+  "configs": {
+    "QQ-消息分类": [
+      {
+        "name": "特别关心设新渠道，并通知时亮屏",
+        "metaInfo": {
+          "title": "^\\[特别关心\\]",
+          "extra": {
+            "channel_id": "abwlimp_4"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "channel_name": "特别关心",
+            "channel_description": null,
+            "channel_id": "speacial_follow"
+          }
+        },
+        "operation": "wake",
+        "stop": false
+      },
+      {
+        "name": "电话通知设新通知渠道",
+        "metaInfo": {
+          "description": "正在呼叫你...",
+          "extra": {
+            "channel_id": "abwlimp_4"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "channel_name": "电话消息",
+            "channel_description": null,
+            "channel_id": "voice_chat"
+          }
+        },
+        "stop": false
+      },
+      {
+        "name": "qq好友消息设新通知渠道",
+        "metaInfo": {
+          "extra": {
+            "intent_uri": "S.jumptype=57618",
+            "channel_id": "abwlimp_4"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "channel_name": "好友消息",
+            "channel_description": null,
+            "channel_id": "contact_chat"
+          }
+        },
+        "stop": false
+      },
+      {
+        "name": "qq群聊消息设新通知渠道",
+        "metaInfo": {
+          "extra": {
+            "intent_uri": "S.jumptype=57619",
+            "channel_id": "abwlimp_4",
+            "__mipush_tag_icon": null
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "channel_name": "群聊消息",
+            "channel_description": null,
+            "channel_id": "group_chat",
+            "__mipush_tag_icon": "1"
+          }
+        },
+        "stop": false
+      },
+      {
+        "name": "qq临时会话消息设新通知渠道",
+        "metaInfo": {
+          "extra": {
+            "intent_uri": "S.jumptype=57620",
+            "channel_id": "abwlimp_4"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "channel_name": "临时会话",
+            "channel_description": null,
+            "channel_id": "temporary_chat"
+          }
+        },
+        "stop": false
+      },
+      {
+        "name": "qq原通知渠道改名",
+        "metaInfo": {
+          "extra": {
+            "channel_id": "abwlimp_4"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "channel_name": "其他消息",
+            "channel_description": null,
+            "channel_id": "abwlimp_4"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "QQ-消息类型标记": [
+      [
+        "cond",
+        [
+          {
+            "metaInfo": {
+              "extra": {
+                "channel_id": "^(?!.*(abwlimp_4|group_chat))"
+              }
+            }
+          },
+          "标记为个人消息"
+        ],
+        [
+          {
+            "metaInfo": {
+              "extra": {
+                "channel_id": "group_chat"
+              }
+            }
+          },
+          "标记为群组消息"
+        ]
+      ]
+    ],
+    "QQ-头像支持": [
+      "qq群头像支持",
+      {
+        "name": "头像支持",
+        "metaInfo": {
+          "extra": {
+            "intent_uri": "S\\.fromuin=(?<id>\\d+)",
+            "notification_large_icon_uri": null
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "notification_large_icon_uri": "http://q.qlogo.cn/g?b=qq&s=100&nk=${id}"
+          }
+        },
+        "stop": false
+      },
+      "大图标显示成圆形"
+    ],
+    "QQ-群消息整形": [
+      "群消息整形-小米经典样式",
+      "群消息整形-原生通知样式"
+    ],
+    "QQ-我的设备消息整形": [
+      {
+        "name": "我的设备消息整形",
+        "metaInfo": {
+          "title": "QQ",
+          "description": "(?<device>^[^:]*):(?<content>.*)"
+        },
+        "newMetaInfo": {
+          "title": "${device}",
+          "description": "${content}"
+        },
+        "stop": false
+      }
+    ],
+    "com.tencent.mobileqq": [
+      "QQ-消息分类",
+      "QQ-消息类型标记",
+      {
+        "name": "QQ 来电时自动唤醒和打开",
+        "metaInfo": {
+          "description": "(?<name>.*) (?<content>正在呼叫你.*)"
+        },
+        "newMetaInfo": {
+          "title": "${name}",
+          "description": "${content}"
+        },
+        "operation": "wake|open",
+        "stop": false
+      },
+      {
+        "name": "qq特定消息时点亮屏幕",
+        "metaInfo": {
+          "description": "有急事|收到请回复"
+        },
+        "operation": "wake",
+        "stop": false
+      },
+      {
+        "name": "特定群聊消息通知",
+        "metaInfo": {
+          "title": "这里改成特定的群聊名称",
+          "description": "^(?!.*(有关注的内容|这里改成@自己的群昵称|这里改成需要通知的关键词))",
+          "extra": {
+            "intent_uri": "S.jumptype=57619"
+          }
+        },
+        "operation": "ignore",
+        "stop": false
+      },
+      "QQ-头像支持",
+      "QQ-我的设备消息整形",
+      "按标题成组",
+      "QQ-群消息整形"
+    ]
+  }
+}

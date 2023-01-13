@@ -1,0 +1,28 @@
+{
+    "version": "0.1.0",
+    "configs": {
+        "com.jingyao.easybike": [
+            {
+                "metaInfo": {
+                    "title": "通话"
+                },
+                "operation": "wake|open",
+                "stop": false
+            },
+            {
+                "name": "哈啰_特定消息通知",
+                "metaInfo": {
+                    "title": "^(?!.*(车主|哈啰打车|语音|通话|客服))",
+                    "description": "^(?!.*(车主|行程|语音|通话|客服))",
+                    "extra": {
+                        "channel_id": null
+                    }
+                },
+                "operation": "ignore",
+                "stop": false
+            },
+            "允许运营消息",
+            "群名作为subtext展示"
+        ]
+    }
+}
