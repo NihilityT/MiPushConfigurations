@@ -179,6 +179,17 @@
         },
         "stop": false
       }
+    ],
+    "将标题相同的通知视为同一会话": [
+      {
+        "metaInfo": {
+          "title": "(?<title>[\\s\\S]*)"
+        },
+        "newMetaInfo": {
+          "notifyId": ["hash", ["$", "title"]]
+        },
+        "stop": false
+      }
     ]
   }
 }
