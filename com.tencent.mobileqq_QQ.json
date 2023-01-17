@@ -169,7 +169,34 @@
         "stop": false
       }
     ],
+    "QQ-会话概念修复": [
+      {
+        "name": "个人消息会话概念修复",
+        "metaInfo": {
+          "extra": {
+            "intent_uri": "S\\.fromuin=(?<id>\\d+)"
+          }
+        },
+        "newMetaInfo": {
+          "notifyId": "${id}"
+        },
+        "stop": false
+      },
+      {
+        "name": "群组消息会话概念修复",
+        "metaInfo": {
+          "extra": {
+            "intent_uri": "S\\.groupcode=(?<id>\\d+)"
+          }
+        },
+        "newMetaInfo": {
+          "notifyId": "${id}"
+        },
+        "stop": false
+      }
+    ],
     "com.tencent.mobileqq": [
+      "QQ-会话概念修复",
       "QQ-消息分类",
       "QQ-消息类型标记",
       {
@@ -206,7 +233,6 @@
       },
       "QQ-头像支持",
       "QQ-我的设备消息整形",
-      "按标题成组",
       "QQ-群消息整形"
     ]
   }
