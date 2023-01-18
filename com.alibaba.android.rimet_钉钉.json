@@ -1,0 +1,30 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "钉钉-会话概念修复": [
+      {
+        "metaInfo": {
+          "extra": {
+            "intent_uri": "cid%3D(?<id>\\d+)"
+          }
+        },
+        "newMetaInfo": {
+          "notifyId": "${id}"
+        },
+        "stop": false
+      }
+    ],
+    "com.alibaba.android.rimet": [
+      "钉钉-会话概念修复",
+      "允许运营消息",
+      {
+        "name": "钉钉来电时自动唤醒和打开",
+        "metaInfo": {
+          "description": "邀请你进行语音通话"
+        },
+        "operation": "wake|open",
+        "stop": false
+      }
+    ]
+  }
+}
