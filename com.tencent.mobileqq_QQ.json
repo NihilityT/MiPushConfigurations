@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "0.1.0",
   "configs": {
     "QQ-消息分类": [
@@ -199,6 +199,8 @@
       "QQ-会话概念修复",
       "QQ-消息分类",
       "QQ-消息类型标记",
+      "QQ-头像支持",
+      "QQ-MessagingStyle",
       {
         "name": "QQ 来电时自动唤醒和打开",
         "metaInfo": {
@@ -231,7 +233,6 @@
         "operation": "ignore",
         "stop": false
       },
-      "QQ-头像支持",
       "QQ-我的设备消息整形",
       "QQ-群消息整形"
     ]

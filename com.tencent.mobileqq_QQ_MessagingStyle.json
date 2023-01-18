@@ -1,0 +1,92 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "QQ-MessagingStyle": [
+      [
+        "cond",
+        [
+          "个人消息",
+          {
+            "name": "移除特别关心",
+            "metaInfo": {
+              "title": "^\\[特别关心\\](?<name>[\\s\\S]*)"
+            },
+            "newMetaInfo": {
+              "title": "${name}",
+              "extra": {
+                "__mi_push_conversation_important": ""
+              }
+            },
+            "stop": false
+          }
+        ]
+      ],
+      {
+        "metaInfo": {
+          "extra": {
+            "intent_uri": "S\\.fromuin=(?<id>\\d+)"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "notification_large_icon_uri": "http://q.qlogo.cn/g?b=qq&s=100&nk=${id}",
+            "__mi_push_conversation_sender_icon": "http://q.qlogo.cn/g?b=qq&s=100&nk=${id}",
+            "__mi_push_conversation_sender_id": "${id}",
+            "__mi_push_conversation_icon": "http://q.qlogo.cn/g?b=qq&s=100&nk=${id}",
+            "__mi_push_conversation_id": "${id}"
+          }
+        },
+        "stop": false
+      },
+      {
+        "metaInfo": {
+          "extra": {
+            "intent_uri": "S\\.groupcode=(?<id>\\d+)"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "notification_large_icon_uri": "http://p.qlogo.cn/gh/${id}/${id}/100",
+            "__mi_push_conversation_icon": "http://p.qlogo.cn/gh/${id}/${id}/100",
+            "__mi_push_conversation_id": "${id}"
+          }
+        },
+        "stop": false
+      },
+      "通用消息内容解析",
+      "使用 Messaging Style",
+      [
+        "cond",
+        [
+          "群组消息",
+          {
+            "metaInfo": {
+              "description": "(?<name>.*?): \\s*(?<content>[\\s\\S]*)"
+            },
+            "newMetaInfo": {
+              "extra": {
+                "__mi_push_conversation_sender": "${name}",
+                "__mi_push_conversation_message": "${content}"
+              }
+            },
+            "stop": false
+          }
+        ]
+      ],
+      {
+        "name": "我的设备消息适配",
+        "metaInfo": {
+          "title": "QQ",
+          "description": "(?<device>^[^:]*):(?<content>.*)"
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_conversation_sender": "${device}",
+            "__mi_push_conversation_message": "${content}"
+          }
+        },
+        "stop": false
+      }
+    ]
+  }
+}
