@@ -54,7 +54,7 @@
         "stop": false
       }
     ],
-    "通用群消息内容解析": [
+    "通用消息内容解析": [
       [
         "cond",
         [
@@ -64,14 +64,33 @@
               "title": "(?<title>.*)",
               "description": "(?<name>.*?)[:：]\\s*(?<content>[\\s\\S]*)",
               "extra": {
-                "__mipush_custom_group": null
+                "__mi_push_conversation_message": null
               }
             },
             "newMetaInfo": {
               "extra": {
-                "__mipush_custom_group": "${title}",
-                "__mipush_custom_sender": "${name}",
-                "__mipush_custom_content": "${content}"
+                "__mi_push_conversation_title": "${title}",
+                "__mi_push_conversation_sender": "${name}",
+                "__mi_push_conversation_message": "${content}"
+              }
+            },
+            "stop": false
+          }
+        ],
+        [
+          "个人消息",
+          {
+            "metaInfo": {
+              "title": "(?<title>.*)",
+              "description": "(?<content>[\\s\\S]*)",
+              "extra": {
+                "__mi_push_conversation_message": null
+              }
+            },
+            "newMetaInfo": {
+              "extra": {
+                "__mi_push_conversation_sender": "${title}",
+                "__mi_push_conversation_message": "${content}"
               }
             },
             "stop": false
@@ -79,14 +98,25 @@
         ]
       ]
     ],
+    "使用 Messaging Style": [
+      "通用消息内容解析",
+      {
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_use_messaging_style": ""
+          }
+        },
+        "stop": false
+      }
+    ],
     "群名作为subtext展示": [
-      "通用群消息内容解析",
+      "通用消息内容解析",
       {
         "metaInfo": {
           "extra": {
-            "__mipush_custom_group": "(?<title>[\\s\\S]*)",
-            "__mipush_custom_sender": "(?<sender>[\\s\\S]*)",
-            "__mipush_custom_content": "(?<content>[\\s\\S]*)"
+            "__mi_push_conversation_title": "(?<title>[\\s\\S]*)",
+            "__mi_push_conversation_sender": "(?<sender>[\\s\\S]*)",
+            "__mi_push_conversation_message": "(?<content>[\\s\\S]*)"
           }
         },
         "newMetaInfo": {
@@ -186,7 +216,13 @@
           "title": "(?<title>[\\s\\S]*)"
         },
         "newMetaInfo": {
-          "notifyId": ["hash", ["$", "title"]]
+          "notifyId": [
+            "hash",
+            [
+              "$",
+              "title"
+            ]
+          ]
         },
         "stop": false
       }
