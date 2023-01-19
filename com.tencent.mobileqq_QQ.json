@@ -186,7 +186,7 @@
         "name": "群组消息会话概念修复",
         "metaInfo": {
           "extra": {
-            "intent_uri": "S\\.groupcode=(?<id>\\d+)"
+            "intent_uri": "^(?!.*S\\.groupuin=).*S\\.groupcode=(?<id>\\d+)"
           }
         },
         "newMetaInfo": {
