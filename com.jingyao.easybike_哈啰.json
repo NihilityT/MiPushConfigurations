@@ -1,7 +1,101 @@
 {
     "version": "0.1.0",
     "configs": {
+        "哈啰-根据关键词保留通知": [
+            {
+                "name": "哈啰_特定消息通知",
+                "metaInfo": {
+                    "title": "^(?!.*(车主|哈啰打车|语音|通话))",
+                    "description": "^(?!.*(车主|行程|语音|通话))",
+                    "extra": {
+                        "channel_id": null
+                    }
+                },
+                "operation": "ignore",
+                "stop": false
+            }
+        ],
+        "哈啰-URL提取": [
+            {
+                "metaInfo": {
+                    "extra": {
+                        "intent_uri": "S\\.JMessageExtra=(?<data>[^;]+)"
+                    }
+                },
+                "newMetaInfo": {
+                    "extra": {
+                        "__mipush_custom_url": [
+                            "property",
+                            "url",
+                            [
+                                "property",
+                                "n_extras",
+                                [
+                                    "parse-json",
+                                    [
+                                        "decode-uri",
+                                        [
+                                            "$",
+                                            "data"
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    }
+                },
+                "stop": false
+            }
+        ],
+        "哈啰-根据跳转 URL 过滤广告": [
+            {
+                "metaInfo": {
+                    "extra": {
+                        "channel_id": null,
+                        "__mipush_custom_url": "^(?!.*hellobike|##)|/bifrost|adSource=|adsource=|/coupon|taskId="
+                    }
+                },
+                "operation": "ignore",
+                "stop": false
+            }
+        ],
+        "哈啰-会话概念修复": [
+            {
+                "metaInfo": {
+                    "extra": {
+                        "channel_id": "high_custom_1",
+                        "__mipush_custom_url": "userId=(?<id>\\d+)"
+                    }
+                },
+                "newMetaInfo": {
+                    "notifyId": "${id}"
+                },
+                "stop": false
+            }
+        ],
+        "哈啰-MessagingStyle": [
+            {
+                "metaInfo": {
+                    "description": "(?<name>.*?)[:：]\\s*(?<content>[\\s\\S]*)",
+                    "extra": {
+                        "channel_id": "high_custom_1"
+                    }
+                },
+                "newMetaInfo": {
+                    "extra": {
+                        "__mi_push_conversation_sender": "${name}",
+                        "__mi_push_conversation_message": "${content}"
+                    }
+                },
+                "stop": false
+            },
+            "使用 Messaging Style"
+        ],
         "com.jingyao.easybike": [
+            "哈啰-URL提取",
+            "哈啰-会话概念修复",
+            "哈啰-根据跳转 URL 过滤广告",
+            "哈啰-MessagingStyle",
             {
                 "metaInfo": {
                     "title": "通话"
@@ -9,20 +103,7 @@
                 "operation": "wake|open",
                 "stop": false
             },
-            {
-                "name": "哈啰_特定消息通知",
-                "metaInfo": {
-                    "title": "^(?!.*(车主|哈啰打车|语音|通话|客服))",
-                    "description": "^(?!.*(车主|行程|语音|通话|客服))",
-                    "extra": {
-                        "channel_id": null
-                    }
-                },
-                "operation": "ignore",
-                "stop": false
-            },
-            "允许运营消息",
-            "群名作为subtext展示"
+            "允许运营消息"
         ]
     }
 }
