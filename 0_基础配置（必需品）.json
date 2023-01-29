@@ -5,7 +5,7 @@
       {
         "metaInfo": {
           "extra": {
-            "channel_name": "运营消息",
+            "channel_id": null,
             "__mipush_tag_notify": null
           }
         },
@@ -17,7 +17,7 @@
       {
         "metaInfo": {
           "extra": {
-            "channel_name": "运营消息"
+            "channel_id": null
           }
         },
         "newMetaInfo": {
