@@ -101,9 +101,32 @@
     "使用 Messaging Style": [
       "通用消息内容解析",
       {
+        "metaInfo": {
+          "extra": {
+            "__mi_push_conversation_message": ""
+          }
+        },
         "newMetaInfo": {
           "extra": {
             "__mi_push_use_messaging_style": ""
+          }
+        },
+        "stop": false
+      }
+    ],
+    "[Messaging Style] 大图标作为个人头像": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__mi_push_conversation_message": "",
+            "notification_large_icon_uri": "(?<icon>[\\s\\S]+)"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_use_messaging_style": "",
+            "__mi_push_conversation_sender_icon": "${icon}",
+            "notification_large_icon_uri": null
           }
         },
         "stop": false
