@@ -233,6 +233,16 @@
         "stop": false
       }
     ],
+    "聊天消息": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__mipush_tag_char_type": ""
+          }
+        },
+        "stop": false
+      }
+    ],
     "将标题相同的通知视为同一会话": [
       {
         "metaInfo": {
