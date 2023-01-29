@@ -31,6 +31,13 @@
 2. 下载所需配置放入该目录中
 3. （可选）若需自定义通知图标，可以在配置目录下创建 `icon` 文件夹，将 [AndroidNotifyIconAdapt](https://github.com/fankes/AndroidNotifyIconAdapt) 仓库的 `json` 文件放入其中
 
+## 配置推荐
+- QQ
+    - 基础配置 `com.tencent.mobileqq_QQ.json`
+    - 消息样式 `com.tencent.mobileqq_QQ_MessagingStyle.json`
+
+# 配置内容说明
+
 ## 配置类型
 配置共分为两类：
 - 主配置，具有实际包名的配置项（`${package}_${appname}.json`）
