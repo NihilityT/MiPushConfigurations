@@ -1,0 +1,19 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "$-直接打开意图": [
+      [
+        "cond",
+        [
+          {
+            "description": "使用 | 来分隔不同的包名",
+            "match": {
+              "packageName": "^(包名写在这里|com.xingin.xhs)$"
+            }
+          },
+          "直接打开意图"
+        ]
+      ]
+    ]
+  }
+}
