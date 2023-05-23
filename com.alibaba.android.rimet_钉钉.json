@@ -1,21 +1,96 @@
 {
   "version": "0.1.0",
   "configs": {
-    "钉钉-会话概念修复": [
+    "钉钉-URL提取": [
       {
         "metaInfo": {
           "extra": {
-            "intent_uri": "cid%3D(?<id>\\d+)"
+            "intent_uri": "S\\.targetUrl=(?<data>[^;]+)"
           }
         },
         "newMetaInfo": {
-          "notifyId": "${id}"
+          "extra": {
+            "__mipush_custom_url": [
+              "decode-uri",
+              [
+                "$",
+                "data"
+              ]
+            ]
+          }
         },
         "stop": false
       }
     ],
+    "钉钉-会话概念修复": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__mipush_custom_url": "\\bcid=(?<id1>[^&]+)"
+          }
+        },
+        "newMetaInfo": {
+          "notifyId": [
+            "hash",
+            [
+              "$",
+              "id1"
+            ]
+          ]
+        },
+        "stop": false
+      }
+    ],
+    "钉钉-消息类型标记": [
+      [
+        "cond",
+        [
+          {
+            "metaInfo": {
+              "extra": {
+                "__mipush_custom_url": "\\bcid=(?<id1>[^&:]+):(?<id2>[^&:]+)"
+              }
+            }
+          },
+          "标记为个人消息"
+        ],
+        [
+          {
+            "metaInfo": {
+              "extra": {
+                "__mipush_custom_url": "\\bcid=(?<id1>[^&:]+)"
+              }
+            }
+          },
+          "标记为群组消息"
+        ]
+      ]
+    ],
+    "钉钉-MessagingStyle": [
+      [
+        "cond",
+        [
+          "群组消息",
+          {
+            "metaInfo": {
+              "description": "(?<name>.*?): \\s*(?<content>[\\s\\S]*)"
+            },
+            "newMetaInfo": {
+              "extra": {
+                "__mi_push_conversation_sender": "${name}"
+              }
+            },
+            "stop": false
+          }
+        ]
+      ],
+      "使用 Messaging Style"
+    ],
     "com.alibaba.android.rimet": [
+      "钉钉-URL提取",
+      "钉钉-消息类型标记",
       "钉钉-会话概念修复",
+      "钉钉-MessagingStyle",
       "允许运营消息",
       {
         "name": "钉钉来电时自动唤醒和打开",
