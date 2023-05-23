@@ -1,0 +1,168 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "干掉运营消息": [
+      {
+        "metaInfo": {
+          "extra": {
+            "channel_id": null,
+            "__mipush_tag_notify": null
+          }
+        },
+        "operation": "ignore",
+        "stop": false
+      }
+    ],
+    "允许运营消息": [
+      {
+        "metaInfo": {
+          "extra": {
+            "channel_id": null
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_tag_notify": ""
+          }
+        },
+        "stop": false
+      }
+    ],
+    "禁止通知成组": [
+      {
+        "metaInfo": {
+          "id": "(?<id>.*)"
+        },
+        "newMetaInfo": {
+          "extra": {
+            "notification_group": "${id}"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "按标题成组": [
+      {
+        "metaInfo": {
+          "title": "(?<title>.*)"
+        },
+        "newMetaInfo": {
+          "extra": {
+            "notification_group": "${title}"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "移除通知副标题": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__mi_push_sub_text": null,
+            "__mipush_tag_sub": null
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_sub_text": ""
+          }
+        },
+        "stop": false
+      }
+    ],
+    "允许通知副标题": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__mi_push_sub_text": null
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_tag_sub": ""
+          }
+        },
+        "stop": false
+      }
+    ],
+    "大图标显示成圆形": [
+      {
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_round_large_icon": ""
+          }
+        },
+        "stop": false
+      }
+    ],
+    "将标题相同的通知视为同一会话": [
+      {
+        "metaInfo": {
+          "title": "(?<title>[\\s\\S]*)"
+        },
+        "newMetaInfo": {
+          "notifyId": [
+            "hash",
+            [
+              "$",
+              "title"
+            ]
+          ]
+        },
+        "stop": false
+      }
+    ],
+    "直接打开意图": [
+      {
+        "match": {
+          "metaInfo": {
+            "extra": {
+              "__mipush_tag_open_directly": null
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "use_clicked_activity": "true"
+            }
+          }
+        },
+        "stop": false
+      }
+    ],
+    "禁止直接打开意图": [
+      {
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "use_clicked_activity": "false",
+              "__mipush_tag_open_directly": ""
+            }
+          }
+        },
+        "stop": false
+      }
+    ],
+    "取 payload 作为 intent": [
+      {
+        "match": {
+          "pushAction": {
+            "message": {
+              "payload": "^(?<intent>\\w+://[\\s\\S]+)"
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "intent_uri": "${intent}",
+              "notify_effect": "2"
+            }
+          }
+        },
+        "stop": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "标记为群组消息": [
+      {
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_tag_char_type": "group"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "群组消息": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__mipush_tag_char_type": "group"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "标记为个人消息": [
+      {
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_tag_char_type": "personal"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "个人消息": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__mipush_tag_char_type": "personal"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "聊天消息": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__mipush_tag_char_type": ""
+          }
+        },
+        "stop": false
+      }
+    ],
+    "trim-description": [
+      {
+        "match": {
+          "metaInfo": {
+            "description": "(?<v>[\\s\\S]+)"
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "description": [
+              "replace",
+              [
+                "$",
+                "v"
+              ],
+              "^\\s+|\\s$",
+              ""
+            ]
+          }
+        },
+        "stop": false
+      }
+    ]
+  }
+}
