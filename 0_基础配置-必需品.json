@@ -124,9 +124,59 @@
         },
         "newMetaInfo": {
           "extra": {
-            "__mi_push_use_messaging_style": "",
             "__mi_push_conversation_sender_icon": "${icon}",
             "notification_large_icon_uri": null
+          }
+        },
+        "stop": false
+      }
+    ],
+    "[Messaging Style] 消息添加标识": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__mipush_conversation_message_indent": null,
+            "__mi_push_conversation_message": "(?<content>[\\s\\S]+)"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_conversation_message": "•${content}"
+          }
+        },
+        "stop": false
+      },
+      {
+        "metaInfo": {
+          "extra": {
+            "__mipush_conversation_message_indent": null,
+            "__mi_push_conversation_message": "(?<content>[\\s\\S]+)"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_conversation_message": [
+              "replace",
+              [
+                "$",
+                "content"
+              ],
+              "(?m)^(?<=\\s)",
+              "　"
+            ]
+          }
+        },
+        "stop": false
+      },
+      {
+        "metaInfo": {
+          "extra": {
+            "__mi_push_conversation_message": ""
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_conversation_message_indent": ""
           }
         },
         "stop": false
@@ -256,6 +306,120 @@
               "title"
             ]
           ]
+        },
+        "stop": false
+      }
+    ],
+    "[Messaging Style]个人、群组会话分离": [
+      [
+        "cond",
+        [
+          "个人消息",
+          {
+            "metaInfo": {
+              "extra": {
+                "__mi_push_conversation_message": "",
+                "__mi_push_use_messaging_style": ""
+              }
+            },
+            "newMetaInfo": {
+              "extra": {
+                "notification_group": "个人消息"
+              }
+            },
+            "stop": false
+          }
+        ],
+        [
+          "群组消息",
+          {
+            "metaInfo": {
+              "extra": {
+                "__mi_push_conversation_message": "",
+                "__mi_push_use_messaging_style": ""
+              }
+            },
+            "newMetaInfo": {
+              "extra": {
+                "notification_group": "群组消息"
+              }
+            },
+            "stop": false
+          }
+        ]
+      ]
+    ],
+    "直接打开意图": [
+      {
+        "match": {
+          "metaInfo": {
+            "extra": {
+              "__mipush_tag_open_directly": null
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "use_clicked_activity": "true"
+            }
+          }
+        },
+        "stop": false
+      }
+    ],
+    "禁止直接打开意图": [
+      {
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "use_clicked_activity": "false",
+              "__mipush_tag_open_directly": ""
+            }
+          }
+        },
+        "stop": false
+      }
+    ],
+    "取 payload 作为 intent": [
+      {
+        "match": {
+          "pushAction": {
+            "message": {
+              "payload": "^(?<intent>\\w+://[\\s\\S]+)"
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "intent_uri": "${intent}",
+              "notify_effect": "2"
+            }
+          }
+        },
+        "stop": false
+      }
+    ],
+    "trim-description": [
+      {
+        "match": {
+          "metaInfo": {
+            "description": "(?<v>[\\s\\S]+)"
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "description": [
+              "replace",
+              [
+                "$",
+                "v"
+              ],
+              "^\\s+|\\s$",
+              ""
+            ]
+          }
         },
         "stop": false
       }
