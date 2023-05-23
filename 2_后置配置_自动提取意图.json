@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "$-自动提取意图": [
+      "取 payload 作为 intent"
+    ]
+  }
+}
