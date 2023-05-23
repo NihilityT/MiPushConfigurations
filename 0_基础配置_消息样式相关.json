@@ -1,0 +1,193 @@
+{
+  "version": "0.1.0",
+  "xmsfVersion": "0.3.8",
+  "configs": {
+    "通用消息内容解析": [
+      [
+        "cond",
+        [
+          "群组消息",
+          {
+            "metaInfo": {
+              "title": "(?<title>.*)",
+              "description": "(?<name>.*?)[:：]\\s*(?<content>[\\s\\S]*)",
+              "extra": {
+                "__mi_push_conversation_message": null
+              }
+            },
+            "newMetaInfo": {
+              "extra": {
+                "__mi_push_conversation_title": "${title}",
+                "__mi_push_conversation_sender": "${name}",
+                "__mi_push_conversation_message": "${content}"
+              }
+            },
+            "stop": false
+          }
+        ],
+        [
+          "个人消息",
+          {
+            "metaInfo": {
+              "title": "(?<title>.*)",
+              "description": "(?<content>[\\s\\S]*)",
+              "extra": {
+                "__mi_push_conversation_message": null
+              }
+            },
+            "newMetaInfo": {
+              "extra": {
+                "__mi_push_conversation_sender": "${title}",
+                "__mi_push_conversation_message": "${content}"
+              }
+            },
+            "stop": false
+          }
+        ]
+      ]
+    ],
+    "使用 Messaging Style": [
+      "通用消息内容解析",
+      {
+        "metaInfo": {
+          "extra": {
+            "__mi_push_conversation_message": ""
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_use_messaging_style": ""
+          }
+        },
+        "stop": false
+      }
+    ],
+    "[Messaging Style] 大图标作为个人头像": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__mi_push_conversation_message": "",
+            "notification_large_icon_uri": "(?<icon>[\\s\\S]+)"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_conversation_sender_icon": "${icon}",
+            "notification_large_icon_uri": null
+          }
+        },
+        "stop": false
+      }
+    ],
+    "[Messaging Style] 消息添加标识": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__mipush_conversation_message_indent": null,
+            "__mi_push_conversation_message": "(?<content>[\\s\\S]+)"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_conversation_message": "•${content}"
+          }
+        },
+        "stop": false
+      },
+      {
+        "metaInfo": {
+          "extra": {
+            "__mipush_conversation_message_indent": null,
+            "__mi_push_conversation_message": "(?<content>[\\s\\S]+)"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_conversation_message": [
+              "replace",
+              [
+                "$",
+                "content"
+              ],
+              "(?m)^(?<=\\s)",
+              "　"
+            ]
+          }
+        },
+        "stop": false
+      },
+      {
+        "metaInfo": {
+          "extra": {
+            "__mi_push_conversation_message": ""
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_conversation_message_indent": ""
+          }
+        },
+        "stop": false
+      }
+    ],
+    "群名作为subtext展示": [
+      "通用消息内容解析",
+      {
+        "metaInfo": {
+          "extra": {
+            "__mi_push_conversation_title": "(?<title>[\\s\\S]*)",
+            "__mi_push_conversation_sender": "(?<sender>[\\s\\S]*)",
+            "__mi_push_conversation_message": "(?<content>[\\s\\S]*)"
+          }
+        },
+        "newMetaInfo": {
+          "title": "${sender}",
+          "description": "${content}",
+          "extra": {
+            "__mi_push_sub_text": "${title}"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "[Messaging Style]个人、群组会话分离": [
+      [
+        "cond",
+        [
+          "个人消息",
+          {
+            "metaInfo": {
+              "extra": {
+                "__mi_push_conversation_message": "",
+                "__mi_push_use_messaging_style": ""
+              }
+            },
+            "newMetaInfo": {
+              "extra": {
+                "notification_group": "个人消息"
+              }
+            },
+            "stop": false
+          }
+        ],
+        [
+          "群组消息",
+          {
+            "metaInfo": {
+              "extra": {
+                "__mi_push_conversation_message": "",
+                "__mi_push_use_messaging_style": ""
+              }
+            },
+            "newMetaInfo": {
+              "extra": {
+                "notification_group": "群组消息"
+              }
+            },
+            "stop": false
+          }
+        ]
+      ]
+    ]
+  }
+}
