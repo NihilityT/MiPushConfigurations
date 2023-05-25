@@ -1,0 +1,46 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "飞书-MessagingStyle": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__lark_image_url": "(?<image>[\\s\\S]+)",
+            "__lark_chat_id": "(?<id>\\d+)",
+            "__lark_sender_name": "(?<name>[\\s\\S]+)"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_conversation_sender_id": [
+              "hash",
+              [
+                "$",
+                "name"
+              ]
+            ],
+            "__mi_push_conversation_icon": "${image}",
+            "__mi_push_conversation_id": "${id}"
+          }
+        },
+        "stop": false
+      },
+      {
+        "metaInfo": {
+          "extra": {
+            "__lark_image_url": "(?<image>[\\s\\S]+)",
+            "__lark_channel_name": null
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_conversation_sender_icon": "${image}"
+          }
+        },
+        "stop": false
+      },
+      "通用消息内容解析",
+      "使用 Messaging Style"
+    ]
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "飞书-提取 payload": [
+      {
+        "match": {
+          "pushAction": {
+            "message": {
+              "payload": "(?<payload>\\{.*\\})"
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "__lark_payload": "${payload}",
+              "__lark_open_url": [
+                "replace",
+                [
+                  "property",
+                  "open_url",
+                  [
+                    "parse-json",
+                    [
+                      "$",
+                      "payload"
+                    ]
+                  ]
+                ],
+                "^http://",
+                ""
+              ],
+              "__lark_title": [
+                "property",
+                "title",
+                [
+                  "parse-json",
+                  [
+                    "$",
+                    "payload"
+                  ]
+                ]
+              ]
+            }
+          }
+        },
+        "stop": false
+      },
+      {
+        "match": {
+          "metaInfo": {
+            "extra": {
+              "__lark_open_url": "(?<info>\\{.*\\})"
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "__lark_chat_id": [
+                "property",
+                "chat_id",
+                [
+                  "parse-json",
+                  [
+                    "$",
+                    "info"
+                  ]
+                ]
+              ],
+              "__lark_channel_name": [
+                "property",
+                "channel_name",
+                [
+                  "parse-json",
+                  [
+                    "$",
+                    "info"
+                  ]
+                ]
+              ],
+              "__lark_sender_name": [
+                "property",
+                "sender_name",
+                [
+                  "parse-json",
+                  [
+                    "$",
+                    "info"
+                  ]
+                ]
+              ],
+              "__lark_image_url": [
+                "decode-base64",
+                [
+                  "property",
+                  "image_url",
+                  [
+                    "parse-json",
+                    [
+                      "$",
+                      "info"
+                    ]
+                  ]
+                ]
+              ]
+            }
+          }
+        },
+        "stop": false
+      }
+    ],
+    "飞书-消息类型标记": [
+      [
+        "cond",
+        [
+          {
+            "match": {
+              "metaInfo": {
+                "extra": {
+                  "__lark_channel_name": ""
+                }
+              }
+            }
+          },
+          "标记为群组消息"
+        ],
+        [
+          {
+            "match": {
+              "metaInfo": {
+                "extra": {
+                  "__lark_channel_name": null
+                }
+              }
+            }
+          },
+          "标记为个人消息"
+        ]
+      ]
+    ],
+    "飞书-头像支持": [
+      {
+        "name": "头像支持",
+        "metaInfo": {
+          "extra": {
+            "__lark_image_url": "(?<image>[\\s\\S]+)"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "notification_large_icon_uri": "${image}"
+          }
+        },
+        "stop": false
+      },
+      "大图标显示成圆形"
+    ],
+    "飞书-消息分类": [
+      [
+        "cond",
+        [
+          "群组消息",
+          {
+            "replace": {
+              "metaInfo": {
+                "extra": {
+                  "channel_name": "群聊消息",
+                  "channel_description": null,
+                  "channel_id": "group_chat"
+                }
+              }
+            },
+            "stop": false
+          }
+        ]
+      ]
+    ],
+    "飞书-会话概念修复": [
+      {
+        "metaInfo": {
+          "extra": {
+            "__lark_chat_id": "(?<id>\\d+)"
+          }
+        },
+        "newMetaInfo": {
+          "notifyId": [
+            "hash",
+            [
+              "$",
+              "id"
+            ]
+          ]
+        },
+        "stop": false
+      },
+      {
+        "metaInfo": {
+          "extra": {
+            "__lark_sender_name": "(?<name>[\\s\\S]+)",
+            "__lark_channel_name": null
+          }
+        },
+        "newMetaInfo": {
+          "title": "${name}"
+        },
+        "stop": false
+      }
+    ],
+    "飞书": [
+      "飞书-提取 payload",
+      "飞书-消息类型标记",
+      "飞书-头像支持",
+      "飞书-消息分类",
+      "飞书-会话概念修复",
+      "飞书-MessagingStyle"
+    ],
+    "com.ss.android.lark.salhdz": [
+      "飞书"
+    ],
+    "com.ss.android.lark": [
+      "飞书"
+    ]
+  }
+}
