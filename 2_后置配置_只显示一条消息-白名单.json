@@ -1,0 +1,35 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "$-只显示一条消息": [
+      [
+        "cond",
+        [
+          {
+            "description": "使用 | 来分隔不同的包名",
+            "match": {
+              "packageName": "^(包名写在这里)$"
+            }
+          },
+          {
+            "match": {
+              "packageName": "(?<package>.*)"
+            },
+            "replace": {
+              "metaInfo": {
+                "notifyId": [
+                  "hash",
+                  [
+                    "$",
+                    "package"
+                  ]
+                ]
+              }
+            },
+            "stop": false
+          }
+        ]
+      ]
+    ]
+  }
+}
