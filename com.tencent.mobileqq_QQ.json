@@ -3,30 +3,9 @@
   "configs": {
     "QQ-消息分类": [
       {
-        "name": "特别关心设新渠道，并通知时亮屏",
-        "metaInfo": {
-          "title": "^\\[特别关心\\]",
-          "extra": {
-            "channel_id": "abwlimp_4"
-          }
-        },
-        "newMetaInfo": {
-          "extra": {
-            "channel_name": "特别关心",
-            "channel_description": null,
-            "channel_id": "speacial_follow"
-          }
-        },
-        "operation": "wake",
-        "stop": false
-      },
-      {
         "name": "电话通知设新通知渠道",
         "metaInfo": {
-          "description": "正在呼叫你...",
-          "extra": {
-            "channel_id": "abwlimp_4"
-          }
+          "description": "正在呼叫你..."
         },
         "newMetaInfo": {
           "extra": {
@@ -41,8 +20,7 @@
         "name": "qq好友消息设新通知渠道",
         "metaInfo": {
           "extra": {
-            "intent_uri": "S.jumptype=57618",
-            "channel_id": "abwlimp_4"
+            "intent_uri": "S.jumptype=57618"
           }
         },
         "newMetaInfo": {
@@ -59,7 +37,6 @@
         "metaInfo": {
           "extra": {
             "intent_uri": "S.jumptype=57619",
-            "channel_id": "abwlimp_4",
             "__mipush_tag_icon": null
           }
         },
@@ -77,8 +54,7 @@
         "name": "qq临时会话消息设新通知渠道",
         "metaInfo": {
           "extra": {
-            "intent_uri": "S.jumptype=57620",
-            "channel_id": "abwlimp_4"
+            "intent_uri": "S.jumptype=57620"
           }
         },
         "newMetaInfo": {
@@ -94,15 +70,52 @@
         "name": "qq原通知渠道改名",
         "metaInfo": {
           "extra": {
-            "channel_id": "abwlimp_4"
+            "channel_id": "105584"
           }
         },
         "newMetaInfo": {
           "extra": {
             "channel_name": "其他消息",
             "channel_description": null,
-            "channel_id": "abwlimp_4"
+            "channel_id": "105584"
           }
+        },
+        "stop": false
+      },
+      {
+        "name": "特别关心设新渠道，并通知时亮屏",
+        "metaInfo": {
+          "title": "^\\[特别关心\\]"
+        },
+        "newMetaInfo": {
+          "extra": {
+            "channel_name": "特别关心",
+            "channel_description": null,
+            "channel_id": "speacial_follow"
+          }
+        },
+        "operation": "wake",
+        "stop": false
+      },
+      {
+        "name": "文件、语音消息识别为好友消息",
+        "metaInfo": {
+          "description": "\\[文件\\]|\\[语音消息\\]",
+          "title": "(?<title>[\\s\\S]*)"
+        },
+        "newMetaInfo": {
+          "extra": {
+            "channel_name": "好友消息",
+            "channel_description": null,
+            "channel_id": "contact_chat"
+          },
+          "notifyId": [
+            "hash",
+            [
+              "$",
+              "title"
+            ]
+          ]
         },
         "stop": false
       }
@@ -114,7 +127,7 @@
           {
             "metaInfo": {
               "extra": {
-                "channel_id": "^(?!.*(abwlimp_4|group_chat))"
+                "channel_id": "^(?!.*(group_chat))"
               }
             }
           },
@@ -160,7 +173,7 @@
         "name": "我的设备消息整形",
         "metaInfo": {
           "title": "QQ",
-          "description": "(?<device>^[^:]*):(?<content>.*)"
+          "description": "(?<device>^[^:]*):(?<content>[\\s\\S]*)"
         },
         "newMetaInfo": {
           "title": "${device}",
@@ -195,6 +208,46 @@
         "stop": false
       }
     ],
+    "QQ-意图重整": [
+      {
+        "match": {
+          "metaInfo": {
+            "extra": {
+              "intent_uri": "^(?!.*S\\.groupuin=).*S\\.groupcode=(?<id>\\d+)",
+              "notify_effect": "2"
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "intent_uri": "mqqwpa://im/chat?chat_type=group&uin=${id}",
+              "notify_effect": "2"
+            }
+          }
+        },
+        "stop": false
+      },
+      {
+        "match": {
+          "metaInfo": {
+            "extra": {
+              "intent_uri": "S\\.fromuin=(?<id>\\d+)",
+              "notify_effect": "2"
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "intent_uri": "mqqwpa://im/chat?chat_type=wpa&uin=${id}",
+              "notify_effect": "2"
+            }
+          }
+        },
+        "stop": false
+      }
+    ],
     "com.tencent.mobileqq": [
       "QQ-会话概念修复",
       "QQ-消息分类",
@@ -225,7 +278,7 @@
         "name": "特定群聊消息通知",
         "metaInfo": {
           "title": "这里改成特定的群聊名称",
-          "description": "^(?!.*(有关注的内容|这里改成@自己的群昵称|这里改成需要通知的关键词))",
+          "description": "^(?!.*(\\[有关注的内容\\]|这里改成@自己的群昵称|这里改成需要通知的关键词))",
           "extra": {
             "intent_uri": "S.jumptype=57619"
           }
@@ -234,7 +287,9 @@
         "stop": false
       },
       "QQ-我的设备消息整形",
-      "QQ-群消息整形"
+      "QQ-群消息整形",
+      "QQ-屏蔽全体消息",
+      "QQ-意图重整"
     ]
   }
 }
