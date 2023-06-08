@@ -6,9 +6,22 @@
         "cond",
         [
           {
+            "description": "忽略阿里移动推送",
+            "match": {
+              "metaInfo": {
+                "extra": {
+                  "callback": "agoo-ack.m.taobao.com"
+                }
+              }
+            }
+          },
+          ""
+        ],
+        [
+          {
             "description": "使用 | 来分隔不同的包名",
             "match": {
-              "packageName": "^(?!(包名写在这里|com.taobao.taobao|com.max.xiaoheihe|com.smzdm.client.android)$)"
+              "packageName": "^(?!(包名写在这里)$)"
             }
           },
           "直接打开意图"
