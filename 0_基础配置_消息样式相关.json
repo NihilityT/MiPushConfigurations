@@ -149,45 +149,6 @@
         },
         "stop": false
       }
-    ],
-    "[Messaging Style]个人、群组会话分离": [
-      [
-        "cond",
-        [
-          "个人消息",
-          {
-            "metaInfo": {
-              "extra": {
-                "__mi_push_conversation_message": "",
-                "__mi_push_use_messaging_style": ""
-              }
-            },
-            "newMetaInfo": {
-              "extra": {
-                "notification_group": "个人消息"
-              }
-            },
-            "stop": false
-          }
-        ],
-        [
-          "群组消息",
-          {
-            "metaInfo": {
-              "extra": {
-                "__mi_push_conversation_message": "",
-                "__mi_push_use_messaging_style": ""
-              }
-            },
-            "newMetaInfo": {
-              "extra": {
-                "notification_group": "群组消息"
-              }
-            },
-            "stop": false
-          }
-        ]
-      ]
     ]
   }
 }
