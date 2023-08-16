@@ -1,0 +1,45 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "QQ-意图重整": [
+      {
+        "match": {
+          "metaInfo": {
+            "extra": {
+              "intent_uri": "^(?!.*S\\.groupuin=).*S\\.groupcode=(?<id>\\d+)",
+              "notify_effect": "2"
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "intent_uri": "mqqwpa://im/chat?chat_type=group&uin=${id}",
+              "notify_effect": "2"
+            }
+          }
+        },
+        "stop": false
+      },
+      {
+        "match": {
+          "metaInfo": {
+            "extra": {
+              "intent_uri": "(?!.*S\\.groupuin=).*S\\.fromuin=(?<id>\\d+)",
+              "notify_effect": "2"
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "intent_uri": "mqqwpa://im/chat?chat_type=c2c&open_type=chat&uin=${id}",
+              "notify_effect": "2"
+            }
+          }
+        },
+        "stop": false
+      }
+    ]
+  }
+}

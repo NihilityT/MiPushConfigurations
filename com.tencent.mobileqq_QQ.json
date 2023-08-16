@@ -208,46 +208,6 @@
         "stop": false
       }
     ],
-    "QQ-意图重整": [
-      {
-        "match": {
-          "metaInfo": {
-            "extra": {
-              "intent_uri": "^(?!.*S\\.groupuin=).*S\\.groupcode=(?<id>\\d+)",
-              "notify_effect": "2"
-            }
-          }
-        },
-        "replace": {
-          "metaInfo": {
-            "extra": {
-              "intent_uri": "mqqwpa://im/chat?chat_type=group&uin=${id}",
-              "notify_effect": "2"
-            }
-          }
-        },
-        "stop": false
-      },
-      {
-        "match": {
-          "metaInfo": {
-            "extra": {
-              "intent_uri": "S\\.fromuin=(?<id>\\d+)",
-              "notify_effect": "2"
-            }
-          }
-        },
-        "replace": {
-          "metaInfo": {
-            "extra": {
-              "intent_uri": "mqqwpa://im/chat?chat_type=wpa&uin=${id}",
-              "notify_effect": "2"
-            }
-          }
-        },
-        "stop": false
-      }
-    ],
     "com.tencent.mobileqq": [
       "QQ-会话概念修复",
       "QQ-消息分类",
