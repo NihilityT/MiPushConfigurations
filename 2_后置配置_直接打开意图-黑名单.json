@@ -19,6 +19,19 @@
         ],
         [
           {
+            "description": "忽略友盟推送",
+            "match": {
+              "metaInfo": {
+                "extra": {
+                  "callback": "ack.upush.umeng.com"
+                }
+              }
+            }
+          },
+          ""
+        ],
+        [
+          {
             "description": "使用 | 来分隔不同的包名",
             "match": {
               "packageName": "^(?!(包名写在这里)$)"
