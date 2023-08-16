@@ -51,8 +51,7 @@
             {
                 "metaInfo": {
                     "extra": {
-                        "channel_id": null,
-                        "__mipush_custom_url": "^(?!.*hellobike|##)|/bifrost|adSource=|adsource=|/coupon|taskId="
+                        "__mipush_custom_url": "^https://"
                     }
                 },
                 "operation": "ignore",
