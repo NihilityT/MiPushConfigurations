@@ -1,0 +1,31 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "$-将透传消息作为通知显示": [
+      [
+        "cond",
+        [
+          {
+            "description": "使用 | 来分隔不同的包名",
+            "match": {
+              "packageName": "^(包名写在这里)$"
+            }
+          },
+          {
+            "match": {
+              "metaInfo": {
+                "notifyId": "(?<id>.*)"
+              }
+            },
+            "replace": {
+              "metaInfo": {
+                "passThrough": "0"
+              }
+            },
+            "stop": false
+          }
+        ]
+      ]
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "$-点击时清理会话通知组": [
+      [
+        "cond",
+        [
+          {
+            "description": "使用 | 来分隔不同的包名",
+            "match": {
+              "packageName": "^(包名写在这里)$",
+              "metaInfo": {
+                "extra": {
+                  "__mipush_group_same_notifyId": "true"
+                }
+              }
+            },
+            "replace": {
+              "metaInfo": {
+                "extra": {
+                  "__mi_push_clear_group": "true"
+                }
+              }
+            },
+            "stop": false
+          }
+        ]
+      ]
+    ]
+  }
+}
