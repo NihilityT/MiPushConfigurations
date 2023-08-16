@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "description": "将消息根据通知渠道分组",
+  "configs": {
+    "$-聊天消息按类型分组": [
+      {
+        "description": "使用 | 来分隔不同的包名",
+        "match": {
+          "packageName": "^(?!(包名写在这里)$)",
+          "metaInfo": {
+            "extra": {
+              "channel_id": "(?<type>.*)"
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "notification_group": "${type}"
+            }
+          }
+        },
+        "stop": false
+      }
+    ]
+  }
+}

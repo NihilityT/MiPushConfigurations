@@ -1,0 +1,30 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "$-群聊消息按群分组": [
+      [
+        "cond",
+        [
+          "群组消息",
+          {
+            "description": "使用 | 来分隔不同的包名",
+            "match": {
+              "packageName": "^(包名写在这里)$",
+              "metaInfo": {
+                "notifyId": "(?<group>.*)"
+              }
+            },
+            "replace": {
+              "metaInfo": {
+                "extra": {
+                  "notification_group": "${group}"
+                }
+              }
+            },
+            "stop": false
+          }
+        ]
+      ]
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "$-聊天消息聚合成一组": [
+      [
+        "cond",
+        [
+          "聊天消息",
+          {
+            "description": "使用 | 来分隔不同的包名",
+            "match": {
+              "packageName": "^(包名写在这里)$"
+            },
+            "replace": {
+              "metaInfo": {
+                "extra": {
+                  "notification_group": "chat"
+                }
+              }
+            },
+            "stop": false
+          }
+        ]
+      ]
+    ]
+  }
+}

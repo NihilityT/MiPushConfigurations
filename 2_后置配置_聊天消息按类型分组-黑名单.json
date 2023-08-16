@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "description": "将消息根据群组、个人消息进行分组",
+  "configs": {
+    "$-聊天消息按类型分组": [
+      {
+        "description": "使用 | 来分隔不同的包名",
+        "match": {
+          "packageName": "^(?!(包名写在这里)$)",
+          "metaInfo": {
+            "extra": {
+              "__mipush_tag_char_type": "(?<type>.*)"
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "notification_group": "${type}"
+            }
+          }
+        },
+        "stop": false
+      }
+    ]
+  }
+}
