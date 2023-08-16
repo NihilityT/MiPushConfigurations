@@ -1,0 +1,27 @@
+{
+    "version": "0.1.0",
+    "configs": {
+        "com.zhihu.android": [
+            {
+                "name": "意图提取",
+                "match": {
+                    "pushAction": {
+                        "message": {
+                            "payload": "(?<payload>[\\s\\S]+)"
+                        }
+                    }
+                },
+                "replace": {
+                    "metaInfo": {
+                        "extra": {
+                            "intent_uri": ["property", "url", ["parse-json", ["$", "payload"]]],
+                            "notify_effect": "2"
+                        }
+                    }
+                },
+                "stop": false
+            },
+            "知乎-忽略盐选内容"
+        ]
+    }
+}

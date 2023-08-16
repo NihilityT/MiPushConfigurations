@@ -1,0 +1,18 @@
+{
+    "version": "0.1.0",
+    "configs": {
+        "知乎-忽略盐选内容": [
+            {
+                "match": {
+                    "pushAction": {
+                        "message": {
+                            "payload": "\"is_member_content\":true"
+                        }
+                    }
+                },
+                "operation": "ignore",
+                "stop": false
+            }
+        ]
+    }
+}
