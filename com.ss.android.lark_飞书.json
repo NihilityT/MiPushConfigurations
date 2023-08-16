@@ -196,13 +196,15 @@
       },
       {
         "metaInfo": {
+          "description": ": (?<content>[\\s\\S]+)",
           "extra": {
             "__lark_sender_name": "(?<name>[\\s\\S]+)",
             "__lark_channel_name": null
           }
         },
         "newMetaInfo": {
-          "title": "${name}"
+          "title": "${name}",
+          "description": "${content}"
         },
         "stop": false
       }
