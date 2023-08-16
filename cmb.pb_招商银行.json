@@ -1,0 +1,130 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "交易标记初始化": [
+      {
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_transaction_type": "",
+            "__mipush_transaction_location": "",
+            "__mipush_transaction_account": ""
+          }
+        },
+        "stop": false
+      }
+    ],
+    "交易符号标记": [
+      {
+        "metaInfo": {
+          "description": "扣款"
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_transaction_sign": "-"
+          }
+        },
+        "stop": false
+      },
+      {
+        "metaInfo": {
+          "description": "退款|入账"
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_transaction_sign": "+"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "交易金额标记": [
+      {
+        "metaInfo": {
+          "description": "(?<amount>(?<=[币元])\\d+(?:.\\d+)?|\\d+(?:.\\d+)?(?=.{0,5}[币元]))"
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_transaction_amount": "${amount}"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "交易类型标记": [
+      {
+        "metaInfo": {
+          "description": "发生(?<type>.+?)扣款"
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_transaction_type": "${type}"
+          }
+        },
+        "stop": false
+      },
+      {
+        "metaInfo": {
+          "description": "执行.*的(?<type>.+?)计划"
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_transaction_type": "${type}"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "交易地点标记": [
+      {
+        "metaInfo": {
+          "description": "[【「](?<location>.+?)[」】]"
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_transaction_location": "${location}"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "交易账号标记": [
+      {
+        "metaInfo": {
+          "description": "(?<account>[账尾][户号]\\d+)"
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mipush_transaction_account": "${account}"
+          }
+        },
+        "stop": false
+      }
+    ],
+    "cmb.pb": [
+      "交易标记初始化",
+      "交易符号标记",
+      "交易金额标记",
+      "交易类型标记",
+      "交易地点标记",
+      "交易账号标记",
+      {
+        "metaInfo": {
+          "extra": {
+            "__mipush_transaction_sign": "(?<sign>.+)",
+            "__mipush_transaction_amount": "(?<amount>.+)",
+            "__mipush_transaction_type": "(?<type>.*)",
+            "__mipush_transaction_location": "(?<location>.*)",
+            "__mipush_transaction_account": "(?<account>.*)"
+          }
+        },
+        "newMetaInfo": {
+          "title": "${account}•${sign}${amount}",
+          "description": "${location}\n${type}"
+        },
+        "stop": false
+      },
+      "trim-description",
+      "招商银行-卡号替换"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "招商银行-卡号替换": [
+      {
+        "match": {
+          "metaInfo": {
+            "title": "(?<v>[\\s\\S]+)"
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "title": [
+              "replace",
+              [
+                "replace",
+                [
+                  "$",
+                  "v"
+                ],
+                "(账户|尾号)1234",
+                "工资卡"
+              ],
+              "(账户|尾号)1234",
+              "医保卡"
+            ]
+          }
+        },
+        "stop": false
+      }
+    ]
+  }
+}
