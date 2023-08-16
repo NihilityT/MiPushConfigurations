@@ -211,6 +211,7 @@
     "com.tencent.mobileqq": [
       "QQ-会话概念修复",
       "QQ-消息分类",
+      "QQ-复用QA通知渠道",
       "QQ-消息类型标记",
       "QQ-头像支持",
       "QQ-MessagingStyle",

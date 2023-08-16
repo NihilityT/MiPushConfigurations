@@ -1,0 +1,46 @@
+{
+  "version": "0.1.0",
+  "configs": {
+    "QQ-复用QA通知渠道": [
+      {
+        "metaInfo": {
+          "extra": {
+            "channel_id": "contact_chat"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_borrow_channel_id": "QQ_Friend"
+          }
+        },
+        "stop": false
+      },
+      {
+        "metaInfo": {
+          "extra": {
+            "channel_id": "group_chat"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_borrow_channel_id": "QQ_Group"
+          }
+        },
+        "stop": false
+      },
+      {
+        "metaInfo": {
+          "extra": {
+            "channel_id": "speacial_follow"
+          }
+        },
+        "newMetaInfo": {
+          "extra": {
+            "__mi_push_borrow_channel_id": "QQ_Friend_Special"
+          }
+        },
+        "stop": false
+      }
+    ]
+  }
+}
