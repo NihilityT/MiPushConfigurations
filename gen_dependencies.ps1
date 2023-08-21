@@ -81,4 +81,7 @@ foreach ($pair in $configLocation.GetEnumerator()) {
 	}
 }
 $mermaid += '```'
-$mermaid -join "`n" | Set-Content dependencies.md -Encoding UTF8 -NoNewline
+$outContent = $mermaid -join "`n"
+$outContent | Set-Content dependencies.md -Encoding UTF8 -NoNewline
+$readme = Get-Content -Raw README_template.md -Encoding UTF8
+$readme -replace '<!-- dependencies -->', $outContent |  Set-Content README.md -Encoding UTF8 -NoNewline
