@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "0.1.0",
   "configs": {
     "抖音-会话概念修复": [
@@ -6,9 +6,11 @@
         "cond",
         [
           {
-            "metaInfo": {
-              "extra": {
-                "origin_channel_id": "pre213"
+            "match": {
+              "pushAction": {
+                "message": {
+                  "payload": "item_type\\\":\\\"im_group"
+                }
               }
             }
           },
@@ -16,9 +18,11 @@
         ],
         [
           {
-            "metaInfo": {
-              "extra": {
-                "channel_id": "100681"
+            "match": {
+              "pushAction": {
+                "message": {
+                  "payload": "item_type\\\":\\\"im"
+                }
               }
             }
           },
@@ -28,37 +32,89 @@
       [
         "cond",
         [
-          "聊天消息",
-          "将标题相同的通知视为同一会话"
-        ]
-      ],
-      [
-        "cond",
-        [
-          "聊天消息",
+          "个人消息",
           {
-            "newMetaInfo": {
-              "extra": {
-                "notification_group": null
+            "replace": {
+              "metaInfo": {
+                "extra": {
+                  "channel_id": "im",
+                  "channel_name": "即时消息"
+                }
+              }
+            },
+            "stop": false
+          }
+        ],
+        [
+          "群组消息",
+          {
+            "replace": {
+              "metaInfo": {
+                "extra": {
+                  "channel_id": "im_group",
+                  "channel_name": "群聊消息"
+                }
               }
             },
             "stop": false
           }
         ]
-      ]
+      ],
+      {
+        "match": {
+          "pushAction": {
+            "message": {
+              "payload": "conv_short_id=(?<id>\\d+)"
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "notifyId": [
+              "hash",
+              [
+                "$",
+                "id"
+              ]
+            ],
+            "extra": {
+              "notification_group": null,
+              "__mi_push_conversation_id": "${id}"
+            }
+          }
+        },
+        "stop": false
+      },
+      {
+        "match": {
+          "pushAction": {
+            "message": {
+              "payload": "author_id\\\":(?<id>\\d+)"
+            }
+          }
+        },
+        "replace": {
+          "metaInfo": {
+            "extra": {
+              "__mi_push_conversation_sender_id": "${id}"
+            }
+          }
+        },
+        "stop": false
+      }
     ],
     "抖音-Messaging Style": [
       "抖音-会话概念修复",
       {
-        "metaInfo": {
-          "extra": {
-            "origin_channel_id": "^pre213$"
+        "match": {
+          "metaInfo": {
+            "description": "(?<name>.*?) 在群中@了你$"
           }
         },
-        "newMetaInfo": {
-          "extra": {
-            "channel_id": "pre213",
-            "channel_name": "群聊消息"
+        "replace": {
+          "metaInfo": {
+            "title": "${name}",
+            "description": "${name}: 在群中@了你"
           }
         },
         "stop": false
