@@ -108,14 +108,7 @@
             "channel_name": "好友消息",
             "channel_description": null,
             "channel_id": "contact_chat"
-          },
-          "notifyId": [
-            "hash",
-            [
-              "$",
-              "title"
-            ]
-          ]
+          }
         },
         "stop": false
       }
